@@ -1,10 +1,24 @@
+import Header from './components/Header.jsx';
+import Hero from './components/Hero.jsx';
+import KatagaJourney from './components/KatagaJourney.jsx';
+import PriorityMission from './components/PriorityMission.jsx';
+import ForYouToday from './components/ForYouToday.jsx';
+import QuickActions from './components/QuickActions.jsx';
+import MemberCard from './components/MemberCard.jsx';
+
 function App() {
   return (
-    <div className="reset-screen">
-      <main className="reset-card">
-        <h1 className="reset-title">KATAGA Portal</h1>
-        <p className="reset-subtitle">Kapatiran ng Talino at Galing</p>
-        <p className="reset-note">UI redesign in progress.</p>
+    <div className="page">
+      <Header />
+      <main className="page-main">
+        <div className="container">
+          <Hero />
+          <KatagaJourney />
+          <PriorityMission />
+          <ForYouToday />
+          <QuickActions />
+          <MemberCard />
+        </div>
       </main>
     </div>
   );

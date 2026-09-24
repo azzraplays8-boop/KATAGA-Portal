@@ -1,46 +1,40 @@
-import { ShieldCheck, UserRound } from 'lucide-react';
-
-// Sample member data — will come from the member profile later.
-const MEMBER = {
-  firstName: 'Aira',
-  lastName: 'Santos',
-  course: 'BS Entrepreneurship',
-  year: '3rd Year',
-  academicYear: 'AY 2026–2027',
-  memberId: 'KATGA-2026-0417',
-};
+import { BadgeCheck, IdCard } from 'lucide-react';
 
 export default function MemberCard() {
   return (
-    <section className="member-card-wrap" id="profile" aria-label="Digital member card">
-      <div className="member-card">
-        <div className="mc-top">
-          <span className="mc-brand">KATAGA</span>
-          <span className="mc-badge">
-            <ShieldCheck size={13} aria-hidden="true" />
-            Verified Member
+    <section className="member-card-section" id="digital-id">
+      <div className="section-head">
+        <h2 className="section-title">Digital Member Card</h2>
+        <p className="section-sub">Your proof of membership, always with you</p>
+      </div>
+
+      <div className="member-card" role="img" aria-label="KATAGA digital member card for Aira Santos, verified member">
+        <span className="card-pattern" aria-hidden="true" />
+        <div className="card-top">
+          <span className="card-brand">
+            <IdCard size={16} aria-hidden="true" /> KATAGA
+          </span>
+          <span className="card-verified">
+            <BadgeCheck size={15} aria-hidden="true" /> Verified Member
           </span>
         </div>
 
-        <h3 className="mc-name">
-          {MEMBER.firstName} {MEMBER.lastName}
-        </h3>
-        <p className="mc-course">
-          {MEMBER.course} · {MEMBER.year}
-        </p>
+        <div className="card-middle">
+          <h3 className="card-name">Aira Santos</h3>
+          <p className="card-course">BS Entrepreneurship · 3rd Year</p>
+          <p className="card-year">AY 2026–2027</p>
+        </div>
 
-        <div className="mc-bottom">
-          <div className="mc-field">
-            Member ID
-            <strong>{MEMBER.memberId}</strong>
+        <div className="card-bottom">
+          <div className="card-id-block">
+            <span className="card-id-label">Member No.</span>
+            <span className="card-id">KATAGA-26-001</span>
           </div>
-          <div className="mc-field">
-            <strong>{MEMBER.academicYear}</strong>
-          </div>
-          <span className="mc-avatar" aria-hidden="true">
-            <UserRound size={20} />
+          <span className="card-qr" aria-hidden="true">
+            <span className="card-qr-inner" />
           </span>
         </div>
+        <span className="card-accent" aria-hidden="true" />
       </div>
     </section>
   );

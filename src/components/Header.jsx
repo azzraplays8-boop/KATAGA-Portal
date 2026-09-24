@@ -1,14 +1,17 @@
-import { Bell, Menu, X, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
+import { Bell, ChevronDown, Menu, X } from 'lucide-react';
 
-// Simple nav data — easy to edit later
-const NAV_LINKS = [
-  { label: 'Home', href: '#', active: true },
-  { label: 'Announcements', href: '#announcements' },
-  { label: 'Calendar', href: '#calendar' },
-  { label: 'Scholarships', href: '#scholarships' },
-  { label: 'Help Desk', href: '#help-desk' },
-];
+const NAV_LINKS = ['Home', 'Announcements', 'Calendar', 'Scholarships', 'Help Desk'];
+
+function LogoMark() {
+  return (
+    <svg viewBox="0 0 40 40" width="38" height="38" aria-hidden="true">
+      <circle cx="20" cy="20" r="19" fill="#4A2C2A" />
+      <path d="M20 9 L31 29 H25.5 L20 17.5 L14.5 29 H9 Z" fill="#F9E5E5" />
+      <circle cx="20" cy="31.5" r="2.4" fill="#B8323A" />
+    </svg>
+  );
+}
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -16,69 +19,47 @@ export default function Header() {
   return (
     <header className="site-header">
       <div className="header-inner">
-        {/* Left: brand */}
-        <a href="#" className="brand-block" aria-label="KATAGA home">
-          <span className="brand-mark" aria-hidden="true">K</span>
-          <span className="brand-copy">
+        <a className="brand" href="#home">
+          <LogoMark />
+          <span className="brand-text">
             <span className="brand-name">KATAGA</span>
-            <small>Kapatiran ng Talino at Galing</small>
+            <span className="brand-sub">Kapatiran ng Talino at Galing</span>
           </span>
         </a>
 
-        {/* Center: navigation */}
-        <nav className="site-nav" aria-label="Main navigation">
+        <nav className={`main-nav ${menuOpen ? 'is-open' : ''}`} aria-label="Main">
           {NAV_LINKS.map((link) => (
             <a
-              key={link.label}
-              href={link.href}
-              className={link.active ? 'nav-link is-active' : 'nav-link'}
-              aria-current={link.active ? 'page' : undefined}
+              key={link}
+              href="#home"
+              className={`nav-link ${link === 'Home' ? 'is-active' : ''}`}
+              onClick={() => setMenuOpen(false)}
             >
-              {link.label}
+              {link}
             </a>
           ))}
         </nav>
 
-        {/* Right: actions */}
         <div className="header-actions">
-          <button type="button" className="icon-button" aria-label="Notifications, 1 unread">
+          <button type="button" className="icon-btn" aria-label="Notifications">
             <Bell size={19} />
             <span className="notif-dot" aria-hidden="true" />
           </button>
-
-          <button type="button" className="profile-button" aria-label="Open member menu for Aira">
-            <span className="profile-avatar" aria-hidden="true">A</span>
-            <span className="profile-name">Aira</span>
-            <ChevronDown size={15} className="profile-caret" aria-hidden="true" />
+          <button type="button" className="member-chip">
+            <span className="member-avatar" aria-hidden="true">A</span>
+            <span className="member-name">Aira</span>
+            <ChevronDown size={16} />
           </button>
-
           <button
             type="button"
-            className="mobile-menu-button"
+            className="menu-toggle"
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen(!menuOpen)}
+            onClick={() => setMenuOpen((open) => !open)}
           >
-            {menuOpen ? <X size={20} /> : <Menu size={20} />}
+            {menuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>
-
-      {/* Mobile navigation */}
-      {menuOpen && (
-        <nav className="mobile-nav" aria-label="Mobile navigation">
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className={link.active ? 'mobile-link is-active' : 'mobile-link'}
-              onClick={() => setMenuOpen(false)}
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
-      )}
     </header>
   );
 }
